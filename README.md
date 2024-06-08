@@ -1,2 +1,1 @@
-# EF Core Inheritance Complex
- 
+# Workflow: Trunk based development
