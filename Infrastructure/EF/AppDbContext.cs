@@ -3,6 +3,7 @@ namespace EFCore.Inherritace.Infrastructure.EF;
 using EFCore.Inherritace.BusinessDomain.CourseAggregate;
 using EFCore.Inherritace.BusinessDomain.UserAggregate;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 public class AppDbContext : DbContext
 {
@@ -27,6 +28,10 @@ public class AppDbContext : DbContext
 
   protected override void OnModelCreating(ModelBuilder modelBuilder)
   {
+    modelBuilder.Entity<User>()
+      .Property(u => u.Role)
+      .HasConversion(new EnumToStringConverter<UserRole>());
+
     modelBuilder.Entity<User>()
       .HasDiscriminator(u => u.Role)
       .HasValue<Student>(UserRole.STUDENT)
