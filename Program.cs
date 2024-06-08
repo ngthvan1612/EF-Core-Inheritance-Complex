@@ -22,6 +22,8 @@ public class Program
       Education = "Master"
     };
 
+    //teacher01.Role = "abc";
+
     dbs.Users.AddAsync(teacher01);
     dbs.Users.AddAsync(student01);
 
@@ -76,21 +78,21 @@ public abstract class User
 
   public string Username { get; set; } = null!;
 
-  public abstract string Role { get; }
+  public abstract string Role { get; protected set; }
 }
 
 public class Student : User
 {
   public string FacebookUrl { get; set; } = null!;
 
-  public override string Role => "STUDENT";
+  public override string Role { get; protected set; } = "STUDENT";
 }
 
 public class Teacher : User
 {
   public string Education { get; set; } = null!;
 
-  public override string Role => "TEACHER";
+  public override string Role { get; protected set; } = "TEACHER";
 
   public ICollection<TeachingCourse> MyCourses { get; set; } = new List<TeachingCourse>();
 
